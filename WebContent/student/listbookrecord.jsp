@@ -106,7 +106,7 @@ text-decoration:none;
      <%}%> 
       <c:choose>
 	    <c:when test="${type==3}">
-	        <tr><td><a href="count/count.jsp">返回操作主界面</a></td></tr> 
+	        <tr><td><a href="education/education.jsp">返回操作主界面</a></td></tr> 
 	    </c:when>
 	    <c:otherwise>
 	      <tr><td><a href="listBook.do">点击这里，继续借书</a></td></tr>
