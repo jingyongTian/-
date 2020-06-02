@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="com.njit.card.entity.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>错误界面</title>
+    <title>教务人员界面</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -74,10 +75,21 @@ function altRows(id){
 }
  </style>
 
-  </head>
-  
-  <body>
-    <P>您所提供的卡号有误,请确认后再提供</P>
-    <a href="count/findFoodRecords.jsp">请重新输入</a>
+  </head>  
+  <body> 
+  <form action="addValue.do" method="post">
+  <table class="altrowstable" id="alternatecolor" align="center">
+  <tr>
+   <td> <P>您的卡号：</P></td> 
+   <td><P><input type="text"  name="cardid" value="<%=request.getParameter("id")%>" readonly/></P></td>
+   </tr>
+   <tr>
+   <td><p>请提供您要充值金额：</p></td><td><p><input type="text" name="value"/></p></td>  
+  </tr>  
+  <tr><td><p><input type="submit" value="充值"/></p></td></tr>
+  <tr><td><a href="education/education.jsp">返回操作主界面</a></td></tr> 
+  <td><input type="button" class="btn"  value="返回上一级" onclick="javascript:history.go(-1);"/></td>
+  </table>
+  </form> 
   </body>
 </html>

@@ -98,10 +98,17 @@ text-decoration:none;
      <td><p>密码：</p></td>  <td><p><input name="mm"  /></p></td>
       </tr>
        <tr>
-     <td><p>性别：</p></td>  <td><p><input    name="xingbie"   /></p></td>
+     <td><p>性别：</p></td>  
+     <td><label class="radio-inline">
+	 	 	<input type="radio" name="xingbie" id="inlineRadio1" value="男" checked="checked"> 男
+		 </label>
+		 <label class="radio-inline">
+		 	<input type="radio" name="xingbie" id="inlineRadio2" value="女"> 女
+		 </label>
+	</td>
       </tr>
        <tr>
-     <td><p>年龄：</p></td>  <td><p><input   name="nianling"   /></p></td>
+     <td><p>年龄：</p></td>  <td>     <p><input   name="nianling"  type="text" class="form-control" required="" pattern="^[0-9]+" /></p></td>
       </tr>
        <tr>
      <td><p>班级：</p></td>  <td><p><input   name="banji"  /></p></td>
@@ -119,7 +126,7 @@ text-decoration:none;
      <td><p>住址：</p></td><td><p><input   name="zhuzhi" /></p></td>
       </tr>
        <tr>
-     <td><p>入学时间：</p></td><td><p><input  name="ruxueshijian"  /></p></td>
+     <td><p>入学时间：</p></td><td><input type="date" style="text-align: center;width: 180px;" value="2016-09-27" name="ruxueshijian"></td>
      </tr>
      <tr><td><p><input type="submit" value="注册"></p></td><td><p><input type="reset" value="取消"></p></td></tr>     
        <tr><td><a href="manageStudent.do">查看学生信息</a></td></tr>

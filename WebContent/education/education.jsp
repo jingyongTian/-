@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.njit.card.entity.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,9 +18,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 
 	<style type="text/css">
-    body{  background: #93defe url(images/bgimage.jpg) no-repeat fixed top;}
+    body{ background-image:url(image/xm.jpg);no-repeat left top;background-size:100%;}
     </style>
-	<link rel="stylesheet" type="text/css" href="styles.css">	
+    <style type="text/css">
+    body{ background-image:url(image/timg.jpg);no-repeat left top;background-size:100%;}
+    </style>
+<!-- 	<link rel="stylesheet" type="text/css" href="styles.css">	 -->
 	
 	<script type="text/javascript">
 function altRows(id){
@@ -49,7 +51,7 @@ function altRows(id){
  <style type="text/css">
  table.altrowstable {
      font-family: verdana,arial,sans-serif;
-     font-size:11px;
+     font-size:30px;
      color:#333333;
      border-width: 1px;
      border-color: #a9c6c9;
@@ -61,6 +63,9 @@ function altRows(id){
      border-style: solid;
      border-color: #a9c6c9;
  }
+ a{
+text-decoration:none;
+}
  table.altrowstable td {
      border-width: 1px;
      padding: 8px;
@@ -76,20 +81,14 @@ function altRows(id){
  </style>
 
   </head>  
-  <body> 
-  <form action="addValue.do" method="post">
-  <table class="altrowstable" id="alternatecolor" align="center">
-  <tr>
-   <td> <P>您的卡号：</P></td> 
-   <td><P><input type="text"  name="cardid" value="<%=request.getParameter("id")%>" readonly/></P></td>
-   </tr>
-   <tr>
-   <td><p>请提供您要充值金额：</p></td><td><p><input type="text" name="value"/></p></td>  
-  </tr>  
-  <tr><td><p><input type="submit" value="充值"/></p></td></tr>
-  <tr><td><a href="count/count.jsp">返回操作主界面</a></td></tr> 
-  <td><input type="button" class="btn"  value="返回上一级" onclick="javascript:history.go(-1);"/></td>
-  </table>
-  </form> 
+  <div class="col-sm-2" style="padding-top:20px,;" align="right">
+	    <a href="${pageContext.request.contextPath }/main/login.jsp" style="color:red">退&nbsp;出&nbsp;&nbsp;&nbsp;&nbsp;</a>
+  </div>
+  <body>
+    <table class="altrowstable" id="alternatecolor" align="center">
+    <tr><td><a href="manageStudent.do">查看/删除学生消费记录</a></td></tr>
+    <tr><td><a href="listCards.do">一卡通查询余额/充值</a></td></tr> 
+    <tr><td><a href="listStudent.do">图书借阅查询</a></td></tr>           
+    </table>
   </body>
 </html>

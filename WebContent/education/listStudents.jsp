@@ -126,6 +126,7 @@ text-decoration:none;
 			for (int i = 0; i <= students.size() - 1; i++) {
 				Student s = students.get(i);				 
 		%>
+
 		<tr class="row<%=i % 2 + 1%>">
 			<td><p><%=s.getStudentid()%></p>
 			</td>
@@ -148,14 +149,14 @@ text-decoration:none;
 			<td><p><%=s.getRuxueshijian()%></p>
 			</td>
 			<td><p>
-					<a href="listBookRecord.do?id=<%=s.getStudentid()%>">查看</a>
+					<a href="education/findFoodRecords.jsp?id=<%=s.getStudentid()%>">查看/删除</a>
 				</p>
 			</td>
 		</tr>
 		<%
 			}
 		%>
-		 <tr><td><a href="count/count.jsp">返回操作主界面</a></td></tr> 
+		 <tr><td><a href="education/education.jsp">返回操作主界面</a></td></tr> 
 	</table>
 </body>
 </html>

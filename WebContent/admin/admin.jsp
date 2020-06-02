@@ -51,7 +51,7 @@ function altRows(id){
  <style type="text/css">
  table.altrowstable {
      font-family: verdana,arial,sans-serif;
-     font-size:11px;
+     font-size:30px;
      color:#333333;
      border-width: 1px;
      border-color: #a9c6c9;
@@ -103,7 +103,7 @@ function altRows(id){
  <style type="text/css">
  table.altrowstable {
      font-family: verdana,arial,sans-serif;
-     font-size:11px;
+     font-size:30px;
      color:#333333;
      border-width: 1px;
      border-color: #a9c6c9;
@@ -133,7 +133,7 @@ text-decoration:none;
  </style>
   </head>  
   <div class="col-sm-2" style="padding-top:20px,;" align="right">
-	    <a href="${pageContext.request.contextPath }/main/login.jsp">退&nbsp;出&nbsp;&nbsp;&nbsp;&nbsp;</a>
+	    <a href="${pageContext.request.contextPath }/main/login.jsp" style="color:red">退&nbsp;出&nbsp;&nbsp;&nbsp;&nbsp;</a>
   </div> 
    <body >
 

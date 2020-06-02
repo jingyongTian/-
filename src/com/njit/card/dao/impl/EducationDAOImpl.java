@@ -2,10 +2,10 @@ package com.njit.card.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import com.njit.card.dao.CountDAO;
+import com.njit.card.dao.EducationDAO;
 import com.njit.card.utils.DBUtil;
 
-public class CountDAOImpl implements CountDAO{
+public class EducationDAOImpl implements EducationDAO{
 	public void delFoodRecordsById(long cardid,long foodid) throws Exception {
 	Connection conn=null;
 	conn=DBUtil.getConnection();

@@ -19,7 +19,7 @@ import com.njit.card.dao.AdminDAO;
 import com.njit.card.dao.LoginDAO;
 import com.njit.card.dao.StudentDAO;
 import com.njit.card.dao.impl.AdminDAOImpl;
-import com.njit.card.dao.impl.CountDAOImpl;
+import com.njit.card.dao.impl.EducationDAOImpl;
 import com.njit.card.dao.impl.LoginDAOImpl;
 import com.njit.card.dao.impl.StudentDAOImpl;
 import com.njit.card.entity.Book;
@@ -66,7 +66,7 @@ public class ServletAction extends HttpServlet {
 				} else if (type == 2) {
 					response.sendRedirect("../admin/admin.jsp");
 				} else {
-					response.sendRedirect("../count/count.jsp");
+					response.sendRedirect("../education/education.jsp");
 				}
 			}
 		} else if (action.equals("/listRegist")) {
@@ -117,24 +117,29 @@ public class ServletAction extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			double balance = card.getBalance();
-			System.out.println(balance);
-			System.out.println(card.getBalance());
-			double danjia = item.getDanjia();
-			if (balance == danjia || balance > danjia) {
-				CostRecord record = new CostRecord();
-				record.setCardid(login.getId());
-				record.setFoodid(foodid);
-				card.setBalance(balance - danjia);
-				try {
-					adminDaoImpl.updateCard(card);
-					daoImpl.addCostRecord(record);
-				} catch (Exception e) {
-					e.printStackTrace();
+			if(card.getCardstate()) {
+				double balance = card.getBalance();
+				System.out.println(balance);
+				System.out.println(card.getBalance());
+				double danjia = item.getDanjia();
+				if (balance == danjia || balance > danjia) {
+					CostRecord record = new CostRecord();
+					record.setCardid(login.getId());
+					record.setFoodid(foodid);
+					card.setBalance(balance - danjia);
+					try {
+						adminDaoImpl.updateCard(card);
+						daoImpl.addCostRecord(record);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					response.sendRedirect("student/buyFoodSuccess.jsp");
+				} else {
+					response.sendRedirect("student/buyFoodError.jsp");
 				}
-				response.sendRedirect("student/buyFoodSuccess.jsp");
-			} else {
-				response.sendRedirect("student/buyFoodError.jsp");
+			}
+			else {
+				response.sendRedirect("education/cardStateError.jsp");
 			}
 			// 显示个人食堂的消费记录
 		} else if (action.equals("/listCostRecord")) {
@@ -268,7 +273,7 @@ public class ServletAction extends HttpServlet {
 			Login login=(Login)session.getAttribute("login");
 			RequestDispatcher rd=null;
 			if(login.getType() == 3) {
-				rd = request.getRequestDispatcher("count/listStudents.jsp");
+				rd = request.getRequestDispatcher("education/listStudents.jsp");
 			}else {
 				rd = request.getRequestDispatcher("admin/listStudents.jsp");
 				}
@@ -279,6 +284,7 @@ public class ServletAction extends HttpServlet {
 			LoginDAOImpl loginImpl = new LoginDAOImpl();
 			try {
 				daoImpl.delStudentById(id);
+				daoImpl.delCardById(id);
 				loginImpl.delById(id);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -366,7 +372,8 @@ public class ServletAction extends HttpServlet {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				// 创建新的学生
 				s = new Student();
-				Login login = new Login(studentid,mm,1);
+				Login login = new Login(studentid, mm, 1);
+				Card card = new Card(studentid, "123", xingming, 0, true, studentid);
 				// 给学生的各个属性赋值
 				s.setStudentid(studentid);
 				s.setBanji(banji);
@@ -387,6 +394,7 @@ public class ServletAction extends HttpServlet {
 				LoginDAOImpl loginImp = new LoginDAOImpl();
 				try {
 					impl.addStudent(s);
+					impl.addCard(card);
 					loginImp.addLogin(login);
 					
 				} catch (Exception e) {
@@ -630,7 +638,7 @@ public class ServletAction extends HttpServlet {
 				if(login.getType() == 2){
 					rd = request.getRequestDispatcher("admin/listCards.jsp");
 				}else {
-					rd = request.getRequestDispatcher("count/listCards.jsp");
+					rd = request.getRequestDispatcher("education/listCards.jsp");
 				}
 				rd.forward(request, response);
 			}
@@ -759,13 +767,13 @@ public class ServletAction extends HttpServlet {
 				request.setAttribute("foodItems", foodItems);
 				request.setAttribute("records", records);
 				RequestDispatcher rd = request
-						.getRequestDispatcher("count/manageFoodRecords.jsp");
+						.getRequestDispatcher("education/manageFoodRecords.jsp");
 				rd.forward(request, response);
 			}
 		} else if (action.equals("/delFoodRecord")) {
 			long cardid = Long.parseLong(request.getParameter("cardid"));
 			long foodid = Long.parseLong(request.getParameter("foodid"));
-			CountDAOImpl daoImpl = new CountDAOImpl();
+			EducationDAOImpl daoImpl = new EducationDAOImpl();
 			try {
 				daoImpl.delFoodRecordsById(cardid, foodid);
 			} catch (Exception e) {
@@ -799,23 +807,35 @@ public class ServletAction extends HttpServlet {
 				request.setAttribute("card", card);
 				request.setAttribute("value", value);
 				RequestDispatcher rd = request
-						.getRequestDispatcher("count/listBalance.jsp");
+						.getRequestDispatcher("education/listBalance.jsp");
 				rd.forward(request, response);
 			} else {
-				response.sendRedirect("count/cardStateError.jsp");
+				response.sendRedirect("education/cardStateError.jsp");
 			}
 		}
 		else if(action.equals("/repassword")) {
+			/*
+			 * LoginDAO dao = new LoginDAOImpl(); long id =
+			 * Long.parseLong(request.getParameter("id")); String newmm =
+			 * request.getParameter("mm"); try { dao.updataById(id, newmm); } catch
+			 * (Exception e) { // TODO 自动生成的 catch 块 e.printStackTrace(); }
+			 * response.sendRedirect("main/login.jsp");
+			 */
 			LoginDAO dao = new LoginDAOImpl();
-			long id = Long.parseLong(request.getParameter("id"));
-			String newmm = request.getParameter("mm");
-			try {
-				dao.updataById(id, newmm);
-			} catch (Exception e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
+			Login login=(Login)session.getAttribute("login");
+			String oldPassword =request.getParameter("oldPassword");
+			String newPassword =request.getParameter("newPassword");
+			if(login.getMm().equals(oldPassword)) {
+				try { dao.updataById(login.getId(), newPassword); } 
+				catch (Exception e) { // TODO 自动生成的 catch 块
+					e.printStackTrace(); 
+					}
+			 response.sendRedirect("../main/login.jsp");
 			}
-			response.sendRedirect("main/login.jsp");
+			else {
+				//System.out.println(login.getMm());
+				response.sendRedirect("../main/passwordError.jsp");
+			}
 		}else if (action.equals("/listStudent")) {
 			AdminDAOImpl daoImpl = new AdminDAOImpl();
 			List<Student> students = null;
@@ -826,7 +846,7 @@ public class ServletAction extends HttpServlet {
 			}
 			request.setAttribute("students", students);
 			RequestDispatcher rd = request
-					.getRequestDispatcher("count/findbook.jsp");
+					.getRequestDispatcher("education/findbook.jsp");
 			rd.forward(request, response);
 		}else if(action.equals("/showclass")){
 			AdminDAOImpl daoImpl = new AdminDAOImpl();

@@ -150,12 +150,7 @@ text-align:center;
       <td><p>姓名：</p></td>
       <td><input id="sname" name="" type="text" value="<%=s.getXingming() %>" readonly/></td>
         </tr>
-        <tr>      
-      <td><p>密码：</p></td>
-      <td><input id="spsword" name="mm" type="password" value="${mm}" /></td>
-      <td width = 35px><input id="bc" type="submit"  value="保存"</td>
-        </tr>
-       <tr>      
+      <tr>      
       <td>
       <p>性别：</p>      
       

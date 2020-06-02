@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.njit.card.entity.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>教务人员界面</title>
+    <title>错误界面</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -61,9 +60,6 @@ function altRows(id){
      border-style: solid;
      border-color: #a9c6c9;
  }
- a{
-text-decoration:none;
-}
  table.altrowstable td {
      border-width: 1px;
      padding: 8px;
@@ -78,19 +74,10 @@ text-decoration:none;
 }
  </style>
 
-  </head>  
-  <div class="col-sm-2" style="padding-top:20px,;" align="right">
-	    <a href="${pageContext.request.contextPath }/main/login.jsp">退&nbsp;出&nbsp;&nbsp;&nbsp;&nbsp;</a>
-  </div>
-  <body> 
-  <form action="findFoodRecords.do" method="post">
-  <table class="altrowstable" id="alternatecolor" align="center">
-  <tr><td> <P>您要操作的卡号为：</P></td></tr>
-  <tr><td><P><input type="text" name="cardid" value="<%=request.getParameter("id")%>" readonly/></P></td></tr>
-  <tr><td><p><input type="submit" value="信息查询"/></p></td></tr>
-  <tr><td><a href="count/count.jsp">返回操作主界面</a></td></tr> 
-      <td><input type="button" class="btn"  value="返回上一级" onclick="javascript:history.go(-1);"/></td>
-  </table>
-  </form> 
+  </head>
+  
+  <body>
+    <P>您所提供的卡号有误,请确认后再提供</P>
+    <a href="education/findFoodRecords.jsp">请重新输入</a>
   </body>
 </html>

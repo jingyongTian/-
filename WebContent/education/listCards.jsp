@@ -110,10 +110,10 @@ text-decoration:none;
    <td><p><%=c.getUsername() %></p></td>
    <td><p><%=c.getBalance()  %></p></td>
    <td><p><%=c.getCardstate()%></p></td>
-   <td width = 35px><a href="count/addValue.jsp?id=<%=c.getCardid()%>">充值</a></td>
+   <td width = 35px><a href="education/addValue.jsp?id=<%=c.getCardid()%>">充值</a></td>
    </tr>   
    <%}%>
-   <tr><td><p><a  href="count/count.jsp">返回一卡通主管理界面</a></p></td></tr>
+   <tr><td><p><a  href="education/education.jsp">返回一卡通主管理界面</a></p></td></tr>
    </table> 
   </body>
 </html>

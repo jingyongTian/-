@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="com.njit.card.entity.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -18,12 +19,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 
 	<style type="text/css">
-    body{ background-image:url(image/xm.jpg);no-repeat left top;background-size:100%;}
+    body{  background: #93defe url(images/bgimage.jpg) no-repeat fixed top;}
     </style>
-    <style type="text/css">
-    body{ background-image:url(image/timg.jpg);no-repeat left top;background-size:100%;}
-    </style>
-<!-- 	<link rel="stylesheet" type="text/css" href="styles.css">	 -->
+	<link rel="stylesheet" type="text/css" href="styles.css">	
 	
 	<script type="text/javascript">
 function altRows(id){
@@ -84,12 +82,15 @@ text-decoration:none;
   <div class="col-sm-2" style="padding-top:20px,;" align="right">
 	    <a href="${pageContext.request.contextPath }/main/login.jsp">退&nbsp;出&nbsp;&nbsp;&nbsp;&nbsp;</a>
   </div>
-  <body>
-    <table class="altrowstable" id="alternatecolor" align="center">
-<!--     <tr><td><a href="repassword.do">查看/修改个人信息</a></td></tr> -->
-    <tr><td><a href="manageStudent.do">查看/删除学生消费记录</a></td></tr>
-    <tr><td><a href="listCards.do">一卡通查询余额/充值</a></td></tr> 
-    <tr><td><a href="listStudent.do">图书借阅查询</a></td></tr>           
-    </table>
+  <body> 
+  <form action="findFoodRecords.do" method="post">
+  <table class="altrowstable" id="alternatecolor" align="center">
+  <tr><td> <P>您要操作的卡号为：</P></td></tr>
+  <tr><td><P><input type="text" name="cardid" value="<%=request.getParameter("id")%>" readonly/></P></td></tr>
+  <tr><td><p><input type="submit" value="信息查询"/></p></td></tr>
+  <tr><td><a href="education/education.jsp">返回操作主界面</a></td></tr> 
+      <td><input type="button" class="btn"  value="返回上一级" onclick="javascript:history.go(-1);"/></td>
+  </table>
+  </form> 
   </body>
 </html>

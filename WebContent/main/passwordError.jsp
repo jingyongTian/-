@@ -1,5 +1,4 @@
-<%@ page language="java" import="java.util.*"%>
-<%@page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>学生界面</title>
+    <title>登录错误</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -19,10 +18,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 
 	<style type="text/css">
-    body{ background-image:url(-image/student.jpg);no-repeat left top;background-size:100%;}
+    body{  background: #93defe url(images/bgimage.jpg) no-repeat fixed top;}
     </style>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">	
-<!-- 	<link rel="stylesheet" href="css/reset.css"/> -->
+	<link rel="stylesheet" type="text/css" href="styles.css">	
 	
 	<script type="text/javascript">
 function altRows(id){
@@ -50,13 +48,11 @@ function altRows(id){
  <style type="text/css">
  table.altrowstable {
      font-family: verdana,arial,sans-serif;
-     font-size:24px;
+     font-size:11px;
      color:#333333;
      border-width: 1px;
      border-color: #a9c6c9;
      border-collapse: collapse;
-     margin：0;
-     float:center;
  }
  table.altrowstable th {
      border-width: 1px;
@@ -76,28 +72,12 @@ function altRows(id){
  .evenrowcolor{
      background-color:#c3dde0;
 }
-a{
-text-decoration:none;
-}
-body{
-text-align:center;
-}
  </style>
 
-  </head>  
-  <div class="col-sm-2" style="padding-top:20px,;" align="right">
-	    <a href="${pageContext.request.contextPath }/main/login.jsp">退&nbsp;出&nbsp;&nbsp;&nbsp;&nbsp;</a>
-  </div>
-  <body >   
-       <table class="altrowstable" id="alternatecolor" cellpadding="5px"  width="500px" height="400px" align="center"   >  
-    <div class="container-fluid">
-	    <h1>欢迎您来到一卡通的世界</h1>
-	 </div>
-	 </div>
-     <tr><td>我的基本信息：</td><td><a href="listRegist.do"> 查看基本信息</a></td></tr>
-    <tr><td>我的生活消费：</td><td><a href="listFoodItem.do">食堂消费</a></td></tr>
-    <tr><td>我的图书馆：</td><td><a href="listBook.do">借阅图书</a></td></tr>  
-    <tr><td>我的密码：</td><td><a href="main/password.jsp">密码修改</a></td></tr>
-    </table> 
+  </head>
+  
+  <body>
+     <p>旧密码错误,请新输入</p>
+     <a href="main/password.jsp">返回修改界面</a>
   </body>
 </html>
